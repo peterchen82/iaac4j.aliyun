@@ -1,0 +1,230 @@
+{
+  "ROSTemplateFormatVersion": "2015-09-01",
+  "Description": "One simple ECS instance and a security group. The user only needs to specify the image ID.",
+  "Parameters": {
+    "AutoReleaseTime": {
+      "Type": "String",
+      "Default": "2017-11-01T20:00:00Z",
+      "Description": "集群自动释放时间"
+    },
+    "MasterIp": {
+      "Type": "String",
+      "Default": "192.168.151.102",
+      "Description": "spark master Id"
+    },
+    "VpcId": {
+      "Type": "String",
+      "Default": "vpc-bp13oqtn1qigqo0n59o9l",
+      "Description": "vpcId"
+    },
+    "SecurityGroupId": {
+      "Type": "String",
+      "Default": "sg-bp1fcchx6gp4o195pp57",
+      "Description": "安全组Id"
+    },
+    "VSwitchId": {
+      "Type": "String",
+      "Default": "vsw-bp1nwrtwsqghe1wmfavrm",
+      "Description": "虚拟交换机id"
+    },
+    "LoginPassword": {
+      "Type": "String",
+      "NoEcho": true,
+      "MaxLength": 41,
+      "MinLength": 8,
+      "AllowedPattern": "[a-zA-Z0-9-\\(\\)\\`\\~\\!@\\#\\$%\\^&\\*-+=\\|\\{\\}\\[\\]\\:\\;\\‘\\,\\.\\?\\/]*",
+      "Description": "ECS登陆密码",
+      "Label": "ECS登陆密码"
+    },
+    "NumOfNodes": {
+      "Type": "Number",
+      "Default": "2",
+      "Label": "Worker节点数",
+      "Description": "指定创建spark的Worker节点数量"
+    },
+    "MasterImageId": {
+      "Type": "String",
+      "Default": "m-bp11u31rjw4d86nh20bg",
+      "Description": "spark master镜像id"
+    },
+    "WorkerImageId": {
+      "Type": "String",
+      "Default": "m-bp1gxv9cje7y4wgzdmqp",
+      "Description": "spark worker镜像id"
+    },
+    "MasterInstanceType": {
+      "Type": "String",
+      "Default": "ecs.n1.medium",
+      "AllowedValues": [
+        "ecs.n1.medium",
+        "ecs.n1.large",
+        "ecs.n2.medium",
+        "ecs.n2.large",
+        "ecs.n4.large",
+        "ecs.n4.xlarge",
+        "ecs.mn4.large",
+        "ecs.mn4.xlarge",
+        "ecs.e4.large",
+        "ecs.cm4.xlarge",
+        "ecs.ce4.xlarge",
+        "ecs.c4.xlarge",
+        "ecs.se1.large",
+        "ecs.se1.xlarge",
+        "ecs.se1.2xlarge",
+        "ecs.se1.4xlarge",
+        "ecs.se1.8xlarge",
+        "ecs.se1.14xlarge",
+        "ecs.se1ne.large",
+        "ecs.se1ne.xlarge",
+        "ecs.se1ne.2xlarge",
+        "ecs.se1ne.4xlarge",
+        "ecs.se1ne.8xlarge",
+        "ecs.se1ne.14xlarge"
+      ],
+      "Label": "ECS实例规格",
+      "Description": "用于为spark的Master节点创建指定规格的ECS实例"
+    },
+    "InstanceType": {
+      "Type": "String",
+      "Default": "ecs.n1.medium",
+      "AllowedValues": [
+        "ecs.n1.medium",
+        "ecs.n1.large",
+        "ecs.n2.medium",
+        "ecs.n2.large",
+        "ecs.n4.large",
+        "ecs.n4.xlarge",
+        "ecs.mn4.large",
+        "ecs.mn4.xlarge",
+        "ecs.e4.large",
+        "ecs.cm4.xlarge",
+        "ecs.ce4.xlarge",
+        "ecs.c4.xlarge",
+        "ecs.se1.large",
+        "ecs.se1.xlarge",
+        "ecs.se1.2xlarge",
+        "ecs.se1.4xlarge",
+        "ecs.se1.8xlarge",
+        "ecs.se1.14xlarge",
+        "ecs.se1ne.large",
+        "ecs.se1ne.xlarge",
+        "ecs.se1ne.2xlarge",
+        "ecs.se1ne.4xlarge",
+        "ecs.se1ne.8xlarge",
+        "ecs.se1ne.14xlarge"
+      ],
+      "Label": "ECS实例规格",
+      "Description": "用于为Spark的Worker节点创建指定规格的ECS实例"
+    }
+  },
+  "Resources": {
+    "Master": {
+      "Type": "ALIYUN::ECS::Instance",
+      "Properties": {
+        "HostName":"spark-master",
+        "ImageId": {
+          "Ref": "MasterImageId"
+        },
+        "InstanceType": {
+          "Ref": "MasterInstanceType"
+        },
+        "PrivateIpAddress": {
+          "Ref": "MasterIp"
+        },
+        "Password": {
+          "Ref": "LoginPassword"
+        },
+        "SecurityGroupId": {
+          "Ref": "SecurityGroupId"
+        },
+        "VSwitchId": {
+          "Ref": "VSwitchId"
+        },
+        "VpcId": {
+          "Ref": "VpcId"
+        },
+        "UserData": {
+          "Fn::Join": [
+            "",
+            [
+              "#!/bin/sh\n",
+              "echo ",
+              {
+                "Ref": "MasterIp"
+              },
+              " spark-master >> /etc/hosts"
+            ]
+          ]
+        },
+        "AllocatePublicIP": false,
+        "IoOptimized": "optimized",
+        "SystemDiskCategory": "cloud_ssd"
+      }
+    },
+    "Worker": {
+      "Type": "ALIYUN::ECS::InstanceGroup",
+      "Properties": {
+        "HostName":"spark-worker",
+        "ImageId": {
+          "Ref": "WorkerImageId"
+        },
+        "NetworkType": "vpc",
+        "InstanceType": {
+          "Ref": "InstanceType"
+        },
+        "VSwitchId": {
+          "Ref": "VSwitchId"
+        },
+        "SecurityGroupId": {
+          "Ref": "SecurityGroupId"
+        },
+        "VpcId": {
+          "Ref": "VpcId"
+        },
+        "Password": {
+          "Ref": "LoginPassword"
+        },
+        "MaxAmount": {
+          "Ref": "NumOfNodes"
+        },
+        "MinAmount": {
+          "Ref": "NumOfNodes"
+        },
+        "UserData": {
+          "Fn::Join": [
+            "",
+            [
+              "#!/bin/sh\n",
+              "echo ",
+              {
+                "Ref": "MasterIp"
+              },
+              " spark-master >> /etc/hosts"
+            ]
+          ]
+        },
+        "AllocatePublicIP": false,
+        "IoOptimized": "optimized",
+        "SystemDiskCategory": "cloud_ssd"
+      }
+    }
+  },
+  "Outputs": {
+    "InstanceId": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Master",
+          "InstanceId"
+        ]
+      }
+    },
+    "PrivateIp": {
+      "Value": {
+        "Fn::GetAtt": [
+          "Master",
+          "PrivateIp"
+        ]
+      }
+    }
+  }
+}
