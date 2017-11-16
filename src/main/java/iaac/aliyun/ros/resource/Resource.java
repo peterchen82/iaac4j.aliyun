@@ -5,10 +5,12 @@ import iaac.aliyun.BaseApi;
 import iaac.aliyun.credential.ApiCredential;
 
 /**
+ * 资源栈中资源相关的api
  * Created by jiechen on 2017/11/2.
  */
 public class Resource extends BaseApi {
 
+    //资源状态
     public class SupportStatus {
         public static final String UNKNOWN = "UNKNOWN";
         public static final String SUPPORTED = "SUPPORTED";
