@@ -12,7 +12,12 @@ import iaac.aliyun.credential.ApiCredential;
 public class List extends ApiRequest {
 
     private DescribeEventsRequest request;
-
+    /**
+     * 构造查询事件列表命令对象
+     * @param request 阿里云Request,可接受各类阿里云RoaAcsRequest的子类
+     * @param region 可用区标识符,Regions类中提供了可用区的常量池
+     * @param credential api鉴权信息
+     */
     public List(RoaAcsRequest request, String region, ApiCredential credential) {
         super(request, region, credential);
         this.request = (DescribeEventsRequest) super.request;

@@ -15,6 +15,11 @@ public class Event extends BaseApi {
         public static final String IN_PROGRESS = "IN_PROGRESS";
         public static final String DELETE_FAILED = "DELETE_FAILED";
     }
+    /**
+     * 构造一个api命令对象
+     * @param region 可用区标识符,Regions类中提供了可用区的常量池
+     * @param credential api鉴权信息
+     */
     public Event(String region, ApiCredential credential) {
         super(region, credential);
     }

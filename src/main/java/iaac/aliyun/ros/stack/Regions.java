@@ -5,6 +5,7 @@ import iaac.aliyun.ApiRequest;
 import iaac.aliyun.credential.ApiCredential;
 
 /**
+ * 返回可用区列表命令
  * Created by jiechen on 2017/11/1.
  */
 public class Regions extends ApiRequest {
