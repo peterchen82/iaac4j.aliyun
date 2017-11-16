@@ -36,7 +36,7 @@ public class Delete extends ApiRequest {
     /**
      * 设置要删除资源栈的可用区id
      * @param regionId 可用区标识符,Regions类中提供了可用区的常量池
-     * @return
+     * @return 自身引用
      */
     public Delete region(String regionId) {
         return (Delete) super.region(regionId);
@@ -45,7 +45,7 @@ public class Delete extends ApiRequest {
     /**
      * 设置资源栈名,删除指定名字的资源栈.可以只指定资源栈名不指定资源栈id,同名取第一个符合条件的(阿里云不允许资源栈同名:))
      * @param name 资源栈名
-     * @return
+     * @return 自身引用
      */
     public Delete name(String name) {
         request.setStackName(name);
@@ -54,7 +54,7 @@ public class Delete extends ApiRequest {
     /**
      * 设置资源栈id,删除指定id的资源栈
      * @param stackId 资源栈id
-     * @return
+     * @return 自身引用
      */
     public Delete id(String stackId) {
         request.setStackId(stackId);
@@ -62,8 +62,8 @@ public class Delete extends ApiRequest {
     }
     /**
      * 删除一个资源栈,删除后资源栈创建的资源也会被释放.不指定资源栈id的情况下可直接通过资源栈名废除.
-     * @return 结果
-     * @throws Exception
+     * @return 成功删除返回空map
+     * @throws Exception 没有提供stackId或资源名没有找到以及服务器端返回了不正确的信息
      */
     public Map run() throws Exception {
         //没有设置stackId时,通过stackName先查询出stackId

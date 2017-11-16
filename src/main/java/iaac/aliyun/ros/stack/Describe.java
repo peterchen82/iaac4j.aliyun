@@ -35,7 +35,7 @@ public class Describe extends ApiRequest {
     /**
      * 设置资源栈名,查询指定名字的资源栈详情.可以只指定资源栈名不指定资源栈id,同名取第一个符合条件的(阿里云不允许资源栈同名:))
      * @param name 资源栈名
-     * @return
+     * @return 自身引用
      */
     public Describe name(String name) {
         request.setStackName(name);
@@ -44,12 +44,18 @@ public class Describe extends ApiRequest {
     /**
      * 设置资源栈id,查询指定id的资源栈详情
      * @param stackId 资源栈id
-     * @return
+     * @return 自身引用
      */
     public Describe id(String stackId) {
         request.setStackId(stackId);
         return this;
     }
+
+    /**
+     * 查询一个资源栈的详情
+     * @return 资源栈详情
+     * @throws Exception 没有提供stackId或资源名没有找到以及服务器端返回了不正确的信息
+     */
     public Map run() throws Exception {
         //没有设置stackId时,通过stackName先查询出stackId
         if (request.getStackId() == null || request.getStackId().equals("")) {

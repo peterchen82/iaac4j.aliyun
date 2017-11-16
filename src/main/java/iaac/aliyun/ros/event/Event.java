@@ -26,7 +26,7 @@ public class Event extends BaseApi {
 
     /**
      * 获取资源栈的事件列表
-     * @return
+     * @return 自身引用
      */
     public List list() {
         return new List(new DescribeEventsRequest(), this.region, this.credential);

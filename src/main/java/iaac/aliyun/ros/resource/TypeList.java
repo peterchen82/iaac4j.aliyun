@@ -26,7 +26,7 @@ public class TypeList extends ApiRequest {
     /**
      * 设置资源状态,查询指定状态的资源类型
      * @param name 状态名
-     * @return
+     * @return 自身引用
      */
     public TypeList status(String name) {
         request.setSupportStatus(name);

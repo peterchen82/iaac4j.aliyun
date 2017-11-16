@@ -22,7 +22,7 @@ public class List extends ApiRequest {
     /**
      * 设置资源栈名,过滤出指定名字的资源栈.
      * @param name 资源栈名
-     * @return
+     * @return 自身引用
      */
     public List name(String name) {
         request.putQueryParameter("Name", name);
@@ -31,7 +31,7 @@ public class List extends ApiRequest {
     /**
      * 设置资源栈id,过滤出指定id的资源栈.
      * @param stackId 资源栈id
-     * @return
+     * @return 自身引用
      */
     public List id(String stackId) {
         request.putQueryParameter("StackId", stackId);
@@ -40,7 +40,7 @@ public class List extends ApiRequest {
     /**
      * 设置资源栈状态,过滤出指定状态的资源栈.
      * @param status 资源栈状态id
-     * @return
+     * @return 自身引用
      */
     public List status(String status) {
         request.putQueryParameter("Status", status);

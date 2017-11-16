@@ -11,7 +11,7 @@ public interface ApiRunnable {
     /**
      * 执行相应的api命令
      * @return 阿里云返回json转换的Map
-     * @throws Exception
+     * @throws Exception 执行命令返回的异常
      */
     public Map run() throws Exception;
 }

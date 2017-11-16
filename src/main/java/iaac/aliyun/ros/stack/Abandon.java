@@ -35,7 +35,7 @@ public class Abandon extends ApiRequest {
     /**
      * 设置要废除资源栈的可用区id
      * @param regionId 可用区标识符,Regions类中提供了可用区的常量池
-     * @return
+     * @return 自身引用
      */
     public Abandon region(String regionId) {
         return (Abandon) super.region(regionId);
@@ -44,7 +44,7 @@ public class Abandon extends ApiRequest {
     /**
      * 设置资源栈名,废弃指定名字的资源栈.可以只指定资源栈名不指定资源栈id,同名取第一个符合条件的(阿里云不允许资源栈同名:))
      * @param name 资源栈名
-     * @return
+     * @return 自身引用
      */
     public Abandon name(String name) {
         request.setStackName(name);
@@ -53,7 +53,7 @@ public class Abandon extends ApiRequest {
     /**
      * 设置资源栈id,废弃指定id的资源栈
      * @param stackId 资源栈id
-     * @return
+     * @return 自身引用
      */
     public Abandon id(String stackId) {
         request.setStackId(stackId);
@@ -63,7 +63,7 @@ public class Abandon extends ApiRequest {
     /**
      * 废弃一个资源栈,废弃后资源栈创建的资源并不会释放.不指定资源栈id的情况下可直接通过资源栈名废除.
      * @return 结果
-     * @throws Exception
+     * @throws Exception 没有提供stackId或资源名没有找到以及服务器端返回了不正确的信息
      */
     public Map run() throws Exception {
         //没有设置stackId时,通过stackName先查询出stackId

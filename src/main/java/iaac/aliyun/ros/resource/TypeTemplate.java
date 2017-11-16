@@ -26,7 +26,7 @@ public class TypeTemplate extends ApiRequest {
     /**
      * 查询指定资源类型名的模板信息
      * @param name 资源类型名
-     * @return
+     * @return 自身引用
      */
     public TypeTemplate type(String name) {
         request.setTypeName(name);

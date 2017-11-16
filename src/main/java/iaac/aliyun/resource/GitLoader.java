@@ -30,9 +30,8 @@ public class GitLoader extends AbstractLoader {
 
     /**
      * 从指定的git仓库地址(目前仅支持http和https)和文件名获取资源,通过UsernameCredential支持鉴权
-     *
      * @return 资源的字符串
-     * @throws Exception
+     * @throws Exception 资源不存在或网络不通
      */
     @Override
     public String load() throws Exception {

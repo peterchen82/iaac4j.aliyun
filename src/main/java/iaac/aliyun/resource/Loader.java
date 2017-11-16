@@ -33,7 +33,7 @@ public interface Loader {
     /**
      * 读取资源
      * @return 资源的字符串形式
-     * @throws Exception
+     * @throws Exception 无法获取资源发生的异常
      */
     public String load() throws Exception;
 }

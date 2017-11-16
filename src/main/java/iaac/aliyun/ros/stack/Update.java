@@ -13,6 +13,7 @@ import java.util.Map;
 public class Update extends TemplateCommand {
     protected UpdateStackRequest request;
     private Stack stack;
+
     /**
      * stack对象的注入方法,用户在内部调用stack其它的api
      * @param stack stack对象实例
@@ -23,36 +24,42 @@ public class Update extends TemplateCommand {
 
     /**
      * 构造删更新源栈命令对象
-     * @param request 阿里云Request,可接受各类阿里云RoaAcsRequest的子类
-     * @param region 可用区标识符,Regions类中提供了可用区的常量池
+     * @param request    阿里云Request,可接受各类阿里云RoaAcsRequest的子类
+     * @param region     可用区标识符,Regions类中提供了可用区的常量池
      * @param credential api鉴权信息
      */
     public Update(RoaAcsRequest request, String region, ApiCredential credential) {
         super(request, region, credential);
         this.request = (UpdateStackRequest) super.request;
     }
+
     /**
      * 设置资源栈名,更新指定名字的资源栈.可以只指定资源栈名不指定资源栈id,同名取第一个符合条件的(阿里云不允许资源栈同名:))
+     *
      * @param name 资源栈名
-     * @return
+     * @return 自身引用
      */
     public Update name(String name) {
         request.setStackName(name);
         return this;
     }
+
     /**
      * 设置资源栈id,更新指定id的资源栈
+     *
      * @param stackId 资源栈id
-     * @return
+     * @return 自身引用
      */
     public Update id(String stackId) {
         request.setStackId(stackId);
         return this;
     }
+
     /**
      * 更新一个资源栈
-     * @return 结果
-     * @throws Exception
+     *
+     * @return 更新后的结果
+     * @throws Exception 没有提供stackId或资源名没有找到以及服务器端返回了不正确的信息
      */
     public Map run() throws Exception {
         //没有设置stackId时,通过stackName先查询出stackId

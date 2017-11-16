@@ -24,7 +24,7 @@ public class FindOne extends List {
     /**
      * 查询给定名字的资源栈详情
      * @return 资源栈详情
-     * @throws Exception
+     * @throws Exception 服务器端返回了不正确的信息
      */
     public Map run() throws Exception {
         Map<String, Object> response = super.run();

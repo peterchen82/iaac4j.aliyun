@@ -5,11 +5,15 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Http资源读取器,给定
+ * Http资源读取器
  * Created by jiechen on 2017/11/6.
  */
 public class HttpLoader extends AbstractLoader {
-
+    /**
+     * 从指定的url地址(支持http和https)和文件名获取资源,通过UsernameCredential支持HttpBasic鉴权
+     * @return 资源的字符串
+     * @throws Exception 资源不存在或网络不通
+     */
     @Override
     public String load() throws Exception {
         String result = null;

@@ -14,7 +14,7 @@ public class FileLoader extends AbstractLoader {
     /**
      * 从文件系统读取一个资源,使用当前ClassLoader读取相对路径
      * @return 资源的字符串
-     * @throws Exception
+     * @throws Exception 资源不存在
      */
     @Override
     public String load() throws Exception {
