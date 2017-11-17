@@ -32,10 +32,9 @@ ROS模板存放在Git上，基于iaac4j.aliyun开发一个接收url请求的服�
 #### 编译
 环境要求：java>=jdk1.8,gradle>=2.3
 
-```java
     1. git clone https://github.com/peterchen82/iaac4j.aliyun.git
     2. cd iaac4j.aliyun&&gradle assemble
-```
+
 ### 初始化Stack API
 
     //定义鉴权信息
