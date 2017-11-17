@@ -13,7 +13,7 @@ iaac4j.aliyun对[阿里云资源编排(ROS)API](https://help.aliyun.com/document
 
 ## 典型应用场景
 ### 快速实现CDI（基础设施的持续交付）
-基础设施也可以像应用一样实施持续交付，**CDI(Continuous Delivery Infrastructure)**是一种实现敏捷化基础设施的方法。
+基础设施也可以像应用一样实施持续交付，**CDI(Continuous Delivery Infrastructure)** 是一种实现敏捷化基础设施的方法。
 
 ROS模板存放在Git上，基于iaac4j.aliyun开发一个接收url请求的服务或通过Jenkins调用iaac4j.aliyun，在Git上发送webhook触发资源栈的创建和更新。企业所有的it资源都可以通过上述流程来管理，实现流水线交付基础设施。
 
