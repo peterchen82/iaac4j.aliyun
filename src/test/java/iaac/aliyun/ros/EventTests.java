@@ -36,7 +36,7 @@ public class EventTests {
                 .type("ALIYUN::ROS::Stack")
                 .resourceName(stackName)
                 .run();
-        System.out.println(response);
+
         List<Map> events = (List<Map>) response.get("Events");
         for (Map event : events) {
             System.out.println(event.get("ResourceName") + ":" + event.get("ResourceType") + "(" + event.get("Status") + ")");
