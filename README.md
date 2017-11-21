@@ -26,9 +26,23 @@ ROS模板存放在Git上，基于iaac4j.aliyun开发一个接收url请求的服�
 ## 开始使用iaac4j.aliyun
 ### 安装
 #### maven:
-`马上就来`
+
+    <dependency>
+        <groupId>com.github.peterchen82</groupId>
+        <artifactId>iaac4j-aliyun-ros</artifactId>
+        <version>1.1</version>
+    </dependency>
+
 #### gradle:
-`马上就来`
+
+    compile 'com.github.peterchen82:iaac4j-aliyun-ros:1.1'
+    
+#### groovy grape
+    
+    @Grapes( 
+    @Grab(group='com.github.peterchen82', module='iaac4j-aliyun-ros', version='1.1') 
+    )
+
 #### 编译
 环境要求：java>=jdk1.8,gradle>=2.3
 
@@ -57,7 +71,7 @@ iaac4j.aliyun完整实现了对资源栈/资源栈事件/资源栈模板/资源�
 ### 预览资源编排模板
 预览模板可以根据传入模板的参数校验这个资源编排是否合法。
 
-iaac4j.aliyun涉及模板操作的操作:`preview/create/update`支持从`本地文件`、`Url`、`Git`加载模板和模板参数文件。
+iaac4j.aliyun涉及模板的操作:`preview/create/update`支持从`本地文件`、`Url`、`Git`加载模板和模板参数文件。
 
 iaac4j.aliyun把所有资源的读取行为抽象为`iaac.aliyun.resource.Loader`，你可以自己实现Loader接口定制自己的读取策略。
 
